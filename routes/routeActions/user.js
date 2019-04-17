@@ -51,15 +51,11 @@ module.exports = private => {
 							name: `${user.firstName} ${user.lastName}`,
 							emailAddress: user.emailAddress,
 						};
-						const { signErr, token } = await jwt.sign(payload, private, {
+						const token = await sign(payload, private, {
 							expiresIn: 30000,
 							algorithm: 'RS256',
 						});
-						if (signErr) {
-							res
-								.status(500)
-								.json({ error: 'Error Signing Token...', raw: signErr });
-						}
+						await new Tokens({ token, user: user.id });
 						res.json({ success: true, token: `Bearer ${token}` });
 					} else {
 						errors.password = 'Password is incorrect';
@@ -70,15 +66,49 @@ module.exports = private => {
 				}
 			}
 		},
+		register: async (req, res) => {
+			const incomingUser = req.body;
+			const { errors, isValid } = validateCreate(incomingUser);
+			if (!isValid) {
+				res.status(400).json(errors);
+			}
+			try {
+				const user = await Users.findOne({
+					emailAddress: incomingUser.emailAddress,
+				});
+				if (user) {
+					errors['Email Exists'] = 'Email Already exists in Database.';
+					res.status(400).json(errors);
+				} else {
+					const newUser = new User({
+						firstName: incomingUser.firstName,
+						lastName: incomingUser.lastName,
+						emailAddress: incomingUser.emailAddress,
+						password: incomingUser.password,
+					});
+					const salt = await genSalt(10);
+					const hsh = await hash(newUser.password, salt);
+					newUser.password = hsh;
+					const result = await newUser.save();
+					res.json(result);
+				}
+			} catch (e) {
+				res.status(500).json(e);
+			}
+        },
+        logout: async (req,res) => {
+            try{
+                const user = await Users.findOne({emailAddress: req.user.emailAddress});
+                const tokens = await Tokens.find({user: user.id});
+                tokens.forEach(t => {
+                    await t.delete();
+                });
+                res.json({message: 'All Tokens Deleted.'});
+            } catch (e) {
+                res.status(500).json(e);
+            }
+        }
 	};
 
 	return User;
 };
-
-// const newUser = new Users(user);
-// try{
-//     const saveResult = await newUser.save();
-//     res.json(saveResult);
-// } catch (e) {
-//     res.status(500).json(e);
-// }

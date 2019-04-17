@@ -18,7 +18,6 @@ const Models = require('../models'),
 /**
  * Import Handlers and Validators
  */
-const validators = require('./routeValidators');
 const handlers = require('./routeActions');
 
 /**
@@ -28,19 +27,11 @@ module.exports = () => {
 	/**
 	 * POST - User Login
 	 */
-	router.post('/login', (req, res) => {
-		//validate user login object
-		//handle processing for user login object (i.e. generate token)
-		//return token object
-	});
+	router.post('/login', handlers.User.login);
 	/**
 	 * Post - User Logout
 	 */
-	router.post('/logout', (req, res) => {
-		//validate token is valid
-		//handle database processing for invalidating token
-		//return result.
-	});
+	router.post('/logout', handlers.User.logout);
 	/**
 	 * Get - Search by user first name and/or lastName (sortable)
 	 */
