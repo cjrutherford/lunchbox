@@ -4,7 +4,7 @@
 
 const Item = require('./item');
 const Order = require('./order');
-const Addresse = require('./address');
+const Address = require('./address');
 const Restaurant = require('./restaurant');
 const Token = require('./token');
 const User = require('./user');
@@ -16,7 +16,7 @@ const User = require('./user');
 module.exports = Models = {
 	Item,
 	Order,
-	Addresse,
+	Address,
 	Restaurant,
 	Token,
 	User,

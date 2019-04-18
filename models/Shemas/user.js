@@ -4,7 +4,7 @@
  */
 
 const mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
 
 /**
  * Shema Definition
@@ -12,13 +12,13 @@ const mongoose = require('mongoose'),
  */
 
 const UserSchema = new Schema({
-	firstName: { type: String, required: true },
-	lastName: { type: String, required: true },
-	emailAddress: { type: String, required: true },
-	password: { type: String, required: true },
-	addresses: [{ type: Schema.Types.ObjectId, ref: 'Addresses' }],
-	createdAt: { type: Date, default: Date.now() },
-	isActive: { type: Boolean, default: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  emailAddress: { type: String, required: true },
+  password: { type: String, required: true },
+  addresses: [{ type: Schema.Types.ObjectId, ref: 'Addresses' }],
+  createdAt: { type: Date, default: Date.now() },
+  isActive: { type: Boolean, default: true },
 });
 
 /**

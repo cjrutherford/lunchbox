@@ -14,10 +14,10 @@ const User = require('./user');
  * Export single Module.
  */
 module.exports = Models = {
-	Item,
-	Order,
-	Addresse,
-	Restaurant,
-	Token,
-	User,
+  Item,
+  Order,
+  Addresse,
+  Restaurant,
+  Token,
+  User,
 };

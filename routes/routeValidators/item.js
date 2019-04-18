@@ -1,4 +1,8 @@
 const validator = require('validator');
 const isEmpty = require('../../utils/isEmpty');
 
-module.exports = items = {};
+module.exports = Items = {
+  validateCreate: () => {
+    return { errors: '', isValid: true };
+  },
+};
