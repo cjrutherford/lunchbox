@@ -75,7 +75,7 @@ module.exports = private => {
           errors['Email Exists'] = 'Email Already exists in Database.';
           res.status(400).json(errors);
         } else {
-          const newUser = new User({
+          const newUser = new Users({
             firstName: incomingUser.firstName,
             lastName: incomingUser.lastName,
             emailAddress: incomingUser.emailAddress,

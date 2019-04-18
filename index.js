@@ -66,7 +66,7 @@ require('./keymanager/manager')()
     //   });
     // });
 
-    const Routes = require('./routes');
+    const Routes = require('./routes')(keys.private);
     app.use('/users', Routes.UserRoutes);
     app.use('/address', Routes.AddressRoutes);
     app.use('/order', Routes.OrderRoutes);

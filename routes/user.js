@@ -12,31 +12,32 @@ const handlers = require('./routeActions');
 /**
  * Define/Export Router for Resources
  */
-module.exports = () => {
+module.exports = private => {
+  const User = handlers.User(private);
   /**
    * POST - User Login
    */
-  router.post('/login', handlers.User.login);
+  router.post('/login', User.login);
   /**
    * Post - User Logout
    */
-  router.post('/logout', handlers.User.logout);
+  router.post('/logout', User.logout);
   /**
    * Get - Search by user first name and/or lastName (sortable)
    */
-  router.get('/', handlers.Users.searchByName);
+  router.get('/', User.searchByName);
   /**
    * Get - User By Id
    */
-  router.get('/:userId', handlers.Users.getById);
+  router.get('/:userId', User.getById);
   /**
    * Post - Create User (i.e. Register)
    */
-  router.post('/', handlers.Users.regiser);
+  router.post('/', User.register);
   /**
    * Put - update user data.
    */
-  router.put('/:userId', handlers.Users.update);
+  router.put('/:userId', User.update);
   /**
    * Post - Add an address to a user.
    * moved to address........
