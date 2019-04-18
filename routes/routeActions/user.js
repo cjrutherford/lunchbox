@@ -21,13 +21,11 @@ const sign = promisify(jwt.sign);
  * import Models for route use.
  */
 const Models = require('../../models'),
-	{ Users, Tokens, Addresses } = Models;
+	{ Users, Tokens } = Models;
 const Validators = require('../routeValidators'),
 	{
 		validateLogin,
-		validateLogout,
 		validateCreate,
-		validateUpdate,
 	} = Validators.User;
 
 module.exports = private => {
@@ -107,8 +105,37 @@ module.exports = private => {
             } catch (e) {
                 res.status(500).json(e);
             }
+        },
+        searchByName: async (req,res) => {
+            const {searchTerm, sort} = req.body;
+            sort = sort === 'asc' ? 1 : -1;
+            try{
+                const results = await Users.find({firstName: {"$regex": searchTerm, "$options": 'i'}, $or:{ lastName: {"$regex": searchTerm, "$options":'i'}}}).sort({firstName: sort}).sort({lastName: sort});
+                
+                res.json(results);
+            } catch (e) {
+                res.status(500).json(e);
+            }
+        },
+        getById: async (req,res) => {
+            const userId = req.params.userId;
+            try{
+                const user = Users.findById(userId);
+                res.json(user);
+            }catch (e) {
+                res.status(500).json(e);
+            }
+        },
+        update: (req,res) => {
+            const userId = req.params.userId;
+            const updateUser = req.body;
+            try{
+                const dbUser = await Users.findByIdAndUpdate(userId, updateUser, {upsert: true});
+                res.json(dbUser);
+            } catch(e) {
+                res.status(500).json(e);
+            }
         }
 	};
-
 	return User;
 };

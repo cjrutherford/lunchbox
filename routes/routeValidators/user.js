@@ -18,7 +18,6 @@ module.exports = users = {
 
 		return { errors, isValid: isEmpty(errors) };
 	},
-	validateLogout: data => {},
 	validateCreate: data => {
 		const errors = {};
 		data.firstName = isEmpty(data.firstName) ? data.firstName : '';
@@ -55,5 +54,4 @@ module.exports = users = {
 		}
 		return { errors, isValid: isEmpty(errors) };
 	},
-	validateUpdate: data => {},
 };

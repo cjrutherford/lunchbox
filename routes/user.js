@@ -35,46 +35,30 @@ module.exports = () => {
 	/**
 	 * Get - Search by user first name and/or lastName (sortable)
 	 */
-	router.get('/', (req, res) => {
-		//grab query from query or body?
-		//gather list of results
-		//return results
-	});
+	router.get('/', handlers.Users.searchByName);
 	/**
 	 * Get - User By Id
 	 */
-	router.get('/:userId', (req, res) => {
-		const { userId } = req.params;
-		//query database for specified user.
-		//return user object (less password of course.)
-	});
+	router.get('/:userId', handlers.Users.getById);
 	/**
 	 * Post - Create User (i.e. Register)
 	 */
-	router.post('/', (req, res) => {
-		//validate new User Object
-		//save user to the database
-		//return new user to the client (less password)
-	});
+	router.post('/', handlers.Users.regiser);
 	/**
 	 * Put - update user data.
 	 */
-	router.put('/:userId', (req, res) => {
-		const { userId } = req.params;
-		//validate data types only, no required fields
-		//save update to database.
-		//return updated user to the client.
-	});
+	router.put('/:userId', handlers.Users.update);
 	/**
 	 * Post - Add an address to a user.
+	 * moved to address........
 	 */
-	router.post('/:userId/address', (req, res) => {
-		const { userId } = req.params;
-		//validate user exists
-		//validate Address is valid
-		//create Address in database
-		//return validated/saved address to client.
-	});
+	// router.post('/:userId/address', (req, res) => {
+	// 	const { userId } = req.params;
+	// 	//validate user exists
+	// 	//validate Address is valid
+	// 	//create Address in database
+	// 	//return validated/saved address to client.
+	// });
 
 	return router;
 };
