@@ -59,16 +59,20 @@ require('./keymanager/manager')()
      * Setup Route Handling...
      */
 
-    app.use('/', (req, res) => {
-      res.json({
-        message:
-          'Sorry, this route is not used. Please check the documentation.',
-      });
-    });
+    // app.use('/', (req, res) => {
+    //   res.json({
+    //     message:
+    //       'Sorry, this route is not used. Please check the documentation.',
+    //   });
+    // });
 
-    app.use('/users', require('./routes').UserRoutes);
-    app.use('/address', require('./routes').AddressRoutes);
-    app.use('/order', require('./routes').OrderRoutes);
+    const Routes = require('./routes');
+    app.use('/users', Routes.UserRoutes);
+    app.use('/address', Routes.AddressRoutes);
+    app.use('/order', Routes.OrderRoutes);
+    app.use('/item', Routes.ItemRoutes);
+    app.use('/restaurant', Routes.RestaurantRoutes);
+    app.use('/meta', Routes.MetaRoutes);
 
     /**
      * Set Server to listen on port
