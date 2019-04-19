@@ -1,5 +1,5 @@
 const Models = require('../../models'),
-  { Items } = Models;
+  { Items, Restaurants, Orders } = Models;
 
 const Validators = require('../routeValidators'),
   { validateCreate } = Validators.Item;
@@ -52,4 +52,50 @@ module.exports = Item = {
       res.status(500).json(e);
     }
   },
+  addToRestaurant: async (req, res) => {
+    const { restaurantId, itemId } = req.params;
+    try {
+      const restaurant = await Restaurants.findById(restaurantId);
+      const item = await Item.findById(itemId);
+      restaurant.items.push(item);
+      const result = await restaurant.save();
+      res.json(result);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  },
+  addToOrder: async (req,res) => {
+    const {orderId, itemId} = req.params;
+    try{
+      const order = await Orders.findById(orderId);
+      const item = await Items.findById(itemId);
+      order.items.push(item);
+      const result = await order.save();
+      res.json(result);
+    }catch(e) {
+      res.status(500).json(e);
+    }
+  },
+  removeFromRestaurant: async(res,res) => {
+    const {restaurantId, itemId} = req.params;
+    try{
+      const restaurant = await Restaurants.findById(restaurantId);
+      restaurant.items = restaurant.items.filter(x => !x.equals(itemId));
+      const result = await restaurant.save();
+      res.json(result);
+    }catch(e) {
+      res.status(500).json(e);
+    }
+  },
+  removeFromOrder: async (req,res) => {
+    const {orderId, itemId} = req.params;
+    try{
+      const order = await Orders.findById(orderId);
+      order.items = order.items.filter(x => !x.equals(itemId));
+      const result = await order.save();
+      res.json(result);
+    }catch(e) {
+      res.status(500).json(e);
+    }
+  }
 };

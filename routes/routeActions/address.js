@@ -23,4 +23,16 @@ module.exports = Address = {
       res.status(500).json(e);
     }
   },
+  delete: async (req, res) => {
+    const { addressId } = req.params;
+    try {
+      const user = await Users.findOne({ addresses: addressId });
+      user.addresses = user.addresses.filter(x => !x.equals(addressId));
+      await user.save();
+      const result = await Addresses.findOneAndDelete({ _id: addressId });
+      res.json(result);
+    } catch (e) {
+      res.status(500).json(e);
+    }
+  },
 };

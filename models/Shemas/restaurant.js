@@ -12,12 +12,13 @@ const QueryPlugin = require('mongoose-query');
  */
 
 const RestaurantSchema = new Schema({
-  firstName: { type: String, required: true },
-  lastName: { type: String, required: true },
-  email: { type: String, required: true },
-  password: { type: String, required: true },
-  addresses: [{ type: Schema.Types.ObjectId, ref: 'Addresses' }],
-  createdAt: { type: Date, default: Date.now() },
+  name: { type: String, required: true },
+  description: { type: String, required: true },
+  geo: {
+    lat: { type: Number, required: true },
+    long: { type: String, required: true },
+  },
+  items: [{ type: Schema.Types.ObjectId, ref: 'Items' }],
   isActive: { type: Boolean, default: true },
 });
 
