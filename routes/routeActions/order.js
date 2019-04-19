@@ -4,7 +4,7 @@ const Models = require('../../models'),
   { Restaurants, Users, Orders } = Models;
 
 const Validators = require('../routeValidators'),
-  { validateCreate } = Validators.Address;
+  { validateCreate } = Validators.Order;
 
 module.exports = Order = {
   getWithQuery: async (req, res) => {

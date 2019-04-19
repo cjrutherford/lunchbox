@@ -1,0 +1,88 @@
+{
+  "items": [
+    {
+      "name": "Roasted Asparigus",
+      "description": "Oven Roasted asparigus seasoned with spices and olive oil.",
+      "price": "3.99",
+      "dietaryRestrictions": ["vegan", "gluten free", "vegetarian"]
+    },
+    {
+      "name": "London Broil",
+      "description": "Tender Beef in Gravy served with mashed potatoes and asparigus",
+      "price": "19.75",
+      "dietaryRestrictions": ["Omnivore"]
+    },
+    {
+      "name": "Beef Teryaki",
+      "description": "Slow Roasted Beef Marinated with Brocoli and Carrots",
+      "price": "8.95",
+      "dietaryRestrictions": ["Omnivore"]
+    },
+    {
+      "name": "Byriani",
+      "description": "Baked Chickpea Balls over Rice.",
+      "price": "8.95",
+      "dietaryRestrictions": ["vegetarian"]
+    },
+    {
+      "name": "Roast Beef",
+      "description": "Just Roast Beef.",
+      "price": "7.50",
+      "dietaryRestrictions": ["beefeater"]
+    },
+    {
+      "name": "Lomein",
+      "description": "with Chicken",
+      "price": "7.50",
+      "dietaryRestrictions": ["omnivore"]
+    },
+    {
+      "name": "Salsbury Steak",
+      "description": "Served with mashed potatoes",
+      "price": "7.50",
+      "dietaryRestrictions": ["beefeater", "omnivore"]
+    }
+  ],
+  "users": [
+    {
+      "firstName": "Timothy",
+      "lastName": "Swinton",
+      "emailAddress": "timbo@candies.com",
+      "password": "al;ksdjaoirnognao",
+      "password2": "al;ksdjaoirnognao"
+    },
+    {
+      "firstName": "Charla",
+      "lastName": "Jackson",
+      "emailAddress": "Chichi@Madamsbakery.com",
+      "password": "al;ksdjaoirnognao",
+      "password2": "al;ksdjaoirnognao"
+    }
+  ],
+  "restaurants": [
+    {
+      "name": "Long Horn Grill",
+      "description": "Small Steakhouse in the heart of El Paso.",
+      "geo": {
+        "lat": "31.783365",
+        "long": "-106.433409"
+      }
+    },
+    {
+      "name": "Bobbies Backyard Buffet",
+      "description": "Small little place with room to rest your feet, and now stay home and have home cooking delivered!",
+      "geo": {
+        "lat": "40.914664",
+        "long": "-74.059450"
+      }
+    },
+    {
+      "name": "Princess Wong Palace",
+      "descriptoin": "Simple Chinese Diner For Italian Plumbers.",
+      "geo": {
+        "lat": "40.714846",
+        "long": "-73.997396"
+      }
+    }
+  ]
+}
