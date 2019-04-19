@@ -31,13 +31,13 @@ const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017';
  */
 mongoose.set('useCreateIndex', true);
 mongoose
-  .connect(mongoURI, { useNewUrlParser: true })
-  .then(() => {
-    console.log(`Successfully connected to MongoDB: ${mongoURI}`);
-  })
-  .catch(err => {
-    console.log(`Error Connecting to MongoDB: ${err}`);
-  });
+	.connect(mongoURI, { useNewUrlParser: true })
+	.then(() => {
+		console.log(`Successfully connected to MongoDB: ${mongoURI}`);
+	})
+	.catch(err => {
+		console.log(`Error Connecting to MongoDB: ${err}`);
+	});
 /**
  * set app to use middleware
  */
@@ -52,35 +52,35 @@ app.use(bp.json()); //allows the parsing of json bodies.
  *
  */
 require('./keymanager/manager')()
-  .then(keys => {
-    //initialize verify mechanism for verification.
-    require('./passport/config')(passport, keys.public);
-    /**
-     * Setup Route Handling...
-     */
+	.then(keys => {
+		//initialize verify mechanism for verification.
+		require('./passport/config')(passport, keys.public);
+		/**
+		 * Setup Route Handling...
+		 */
 
-    // app.use('/', (req, res) => {
-    //   res.json({
-    //     message:
-    //       'Sorry, this route is not used. Please check the documentation.',
-    //   });
-    // });
+		// app.use('/', (req, res) => {
+		//   res.json({
+		//     message:
+		//       'Sorry, this route is not used. Please check the documentation.',
+		//   });
+		// });
 
-    const Routes = require('./routes')(keys.private);
-    app.use('/users', Routes.UserRoutes);
-    app.use('/address', Routes.AddressRoutes);
-    app.use('/order', Routes.OrderRoutes);
-    app.use('/item', Routes.ItemRoutes);
-    app.use('/restaurant', Routes.RestaurantRoutes);
-    app.use('/meta', Routes.MetaRoutes);
+		const Routes = require('./routes')(keys.private, passport);
+		app.use('/users', Routes.UserRoutes);
+		app.use('/address', Routes.AddressRoutes);
+		app.use('/order', Routes.OrderRoutes);
+		app.use('/item', Routes.ItemRoutes);
+		app.use('/restaurant', Routes.RestaurantRoutes);
+		app.use('/meta', Routes.MetaRoutes);
 
-    /**
-     * Set Server to listen on port
-     */
+		/**
+		 * Set Server to listen on port
+		 */
 
-    app.listen(port, err => {
-      if (err) console.error(err);
-      console.log(`Server is listening for requests on Port: ${port}`);
-    });
-  })
-  .catch(err => console.error(err));
+		app.listen(port, err => {
+			if (err) console.error(err);
+			console.log(`Server is listening for requests on Port: ${port}`);
+		});
+	})
+	.catch(err => console.error(err));

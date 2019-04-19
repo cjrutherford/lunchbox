@@ -4,14 +4,14 @@ const ItemRoutes = require('./item');
 const RestaurantRoutes = require('./restaurant');
 const MetaRoutes = require('./meta');
 
-module.exports = private => {
-  const UserRoutes = require('./user')(private);
-  return {
-    UserRoutes,
-    AddressRoutes,
-    OrderRoutes,
-    ItemRoutes,
-    RestaurantRoutes,
-    MetaRoutes,
-  };
+module.exports = (private, passport) => {
+	const UserRoutes = require('./user')(private, passport);
+	return {
+		UserRoutes,
+		AddressRoutes,
+		OrderRoutes,
+		ItemRoutes,
+		RestaurantRoutes,
+		MetaRoutes,
+	};
 };

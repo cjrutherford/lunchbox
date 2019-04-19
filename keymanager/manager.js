@@ -22,22 +22,23 @@ const ensureFolder = path => {
 };
 
 const ensureKeys = () => {
+	console.log(__dirname);
 	return new Promise((resolve, reject) => {
-		ensureFolder('../keys').then(() => {
+		ensureFolder('./keys').then(() => {
 			try {
 				if (
-					!fs.existsSync('../keys/private.key') &&
-					!fs.existsSync('../keys/public.key')
+					!fs.existsSync('./keys/private.key') &&
+					!fs.existsSync('./keys/public.key')
 				) {
 					// console.log('Keys do not exist, generating them now.');
 					const keys = keypair();
-					fs.writeFileSync('../keys/private.key', keys.private);
-					fs.writeFileSync('../keys/public.key', keys.public);
+					fs.writeFileSync('./keys/private.key', keys.private);
+					fs.writeFileSync('./keys/public.key', keys.public);
 					resolve({ private: keys.private, public: keys.public });
 				} else {
 					// console.log('Keys already exist. Loading Them Now.');
-					const pubkey = fs.readFileSync('../keys/public.key', 'utf8');
-					const privkey = fs.readFileSync('../keys/private.key', 'utf8');
+					const pubkey = fs.readFileSync('./keys/public.key', 'utf8');
+					const privkey = fs.readFileSync('./keys/private.key', 'utf8');
 					resolve({ private: privkey, public: pubkey });
 				}
 			} catch (err) {
