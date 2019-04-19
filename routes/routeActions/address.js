@@ -8,8 +8,9 @@ const Validators = require('../routeValidators'),
 
 module.exports = Address = {
   addToUser: async (req, res) => {
-    const { userId } = req.params;
+    const { userId } = req.body;
     const address = req.body;
+    delete address.userId;
     const { errors, isValid } = validateCreate(address);
     if (!isValid) res.status(400).json(errors);
     try {
@@ -17,7 +18,7 @@ module.exports = Address = {
       const user = await Users.findById(userId);
       user.addresses.push(newAddress._id);
       await user.save();
-      res.json(newAddress, user);
+      res.json({ newAddress, user });
     } catch (e) {
       res.status(500).json(e);
     }

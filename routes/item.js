@@ -1,28 +1,28 @@
 const router = require('express').Router();
 
-const handlers = require('./routeActions');
+const { Item } = require('./routeActions');
 
 module.exports = () => {
   /**
    * GET - Query
    */
-  router.get('/', handlers.Item.getByQuery);
+  router.get('/', Item.getByQuery);
   /**
    * GET - By ID
    */
-  router.get('/:itemId', handlers.Item.getById);
+  router.get('/:itemId', Item.getById);
   /**
    * POST - create item
    */
-  router.post('/', handlers.Item.create);
+  router.post('/', Item.create);
   /**
    * PUT - update item
    */
-  router.put('/:itemId', handlers.Item.updateItem);
+  router.put('/:itemId', Item.updateItem);
   /**
    * DELETE - delete item
    */
-  router.delete('/:itemId', handlers.Item.deleteItem);
+  router.delete('/:itemId', Item.deleteItem);
 
   return router;
 };

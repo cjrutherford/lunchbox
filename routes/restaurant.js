@@ -1,22 +1,22 @@
 const router = require('express').Router();
 
-const handlers = require('./routeActions');
+const { Restaurant } = require('./routeActions');
 
 module.exports = () => {
   /** GET
    * query restaurants by any field
    */
-  router.get('/', handlers.Restaurant.getByQuery);
+  router.get('/', Restaurant.getByQuery);
   /**
    * GET - By Id
    */
-  router.get('/:restaurantId', handlers.Restaurant.getById);
+  router.get('/:restaurantId', Restaurant.getById);
   /**
    * POST - new restaurant
    */
-  router.post('/', handlers.Restaurant.create);
+  router.post('/', Restaurant.create);
   /**
    * PUT - update restaurant
    */
-  router.put('/:restaurantId', handlers.Restaurant.update);
+  router.put('/:restaurantId', Restaurant.update);
 };

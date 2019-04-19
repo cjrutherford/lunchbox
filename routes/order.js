@@ -1,23 +1,23 @@
 const router = require('express').Router();
 
-const handlers = require('./routeActions');
+const { Orders } = require('./routeActions');
 
 module.exports = () => {
   /**
    * GET - search by any field.
    */
-  router.get('/', handlers.Orders.getWithQuery);
+  router.get('/', Orders.getWithQuery);
   /**
    * GET - order by id
    */
-  router.get('/:orderId', handlers.Orders.getById);
+  router.get('/:orderId', Orders.getById);
   /**
    * POST - create order.
    */
   router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
-    handlers.Orders.create,
+    Orders.create,
   );
 
   return router;
