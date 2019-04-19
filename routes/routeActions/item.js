@@ -10,7 +10,7 @@ module.exports = Item = {
 			const data = await Items.query(req.query);
 			res.json(data);
 		} catch (e) {
-			res.status(500).json(err);
+			res.status(500).json(e);
 		}
 	},
 	getById: async (req, res) => {
@@ -56,7 +56,7 @@ module.exports = Item = {
 		const { restaurantId, itemId } = req.params;
 		try {
 			const restaurant = await Restaurants.findById(restaurantId);
-			const item = await Item.findById(itemId);
+			const item = await Items.findById(itemId);
 			restaurant.items.push(item);
 			const result = await restaurant.save();
 			res.json(result);
