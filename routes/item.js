@@ -15,14 +15,14 @@ module.exports = () => {
    * POST - create item
    */
   router.post('/', Item.create);
-  router.post('/restaurant/:restaurantId', Item.addToRestaurant);
-  router.post('/order/:orderId', Item.addToOrder);
+  router.post('/restaurant/:restaurantId/:itemId', Item.addToRestaurant);
+  router.post('/order/:orderId/:itemId', Item.addToOrder);
   /**
    * PUT - update item
    */
   router.put('/:itemId', Item.updateItem);
-  router.delete('/restaurant/:restaurantId', Item.removeFromRestaurant);
-  router.delete('/order/:orderId', Item.removeFromOrder);
+  router.delete('/restaurant/:restaurantId/:itemId', Item.removeFromRestaurant);
+  router.delete('/order/:orderId/:itemId', Item.removeFromOrder);
   /**
    * DELETE - delete item
    */
