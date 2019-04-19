@@ -14,10 +14,10 @@ module.exports = Restaurant = {
     }
   },
   getById: async (req, res) => {
-    const { userId } = req.params;
+    const { restaurantId } = req.params;
     try {
-      const user = await Restaurants.findById(userId);
-      res.json(user);
+      const restaurant = await Restaurants.findById(restaurantId);
+      res.json(restaurant);
     } catch (e) {
       res.status(500).json(e);
     }
@@ -37,8 +37,8 @@ module.exports = Restaurant = {
     const { restaurantId } = req.params;
     const inputRestaurant = req.body;
     try {
-      const updatedRestaurant = await Restaurants.findByIdAndUpdate(
-        restaurantId,
+      const updatedRestaurant = await Restaurants.findOneAndUpdate(
+        { _id: restaurantId },
         inputRestaurant,
         { upsert: true },
       );
